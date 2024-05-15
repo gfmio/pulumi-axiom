@@ -10,5 +10,5 @@ pluginManagement {
   }
 }
 
-rootProject.name = "io.gfm.pulumiaxiom"
+rootProject.name = "io.gfm.pulumiaxiom.axiom"
 include("lib")

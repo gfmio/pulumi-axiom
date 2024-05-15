@@ -8,8 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/gfmio/pulumi-axiom/sdk/go/axiom/internal"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // The provider type for the axiom package. By default, resources use package-wide configuration

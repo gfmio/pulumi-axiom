@@ -63,7 +63,7 @@ namespace PulumiAxiom.Axiom
         static Utilities()
         {
             var assembly = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(Utilities)).Assembly;
-            using var stream = assembly.GetManifestResourceStream("Pulumiverse.Axiom.version.txt");
+            using var stream = assembly.GetManifestResourceStream("PulumiAxiom.Axiom.version.txt");
             using var reader = new global::System.IO.StreamReader(stream ?? throw new global::System.NotSupportedException("Missing embedded version.txt file"));
             version = reader.ReadToEnd().Trim();
             var parts = version.Split("\n");

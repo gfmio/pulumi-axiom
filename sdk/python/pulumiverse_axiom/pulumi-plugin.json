@@ -1,5 +1,0 @@
-{
-  "resource": true,
-  "name": "axiom",
-  "server": "github://api.github.com/gfmio/pulumi-axiom"
-}

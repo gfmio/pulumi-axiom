@@ -2,8 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 
-import * as pulumi from "@pulumi/pulumi";
 import * as runtime from "@pulumi/pulumi/runtime";
+import * as pulumi from "@pulumi/pulumi";
 
 export function getEnv(...vars: string[]): string | undefined {
     for (const v of vars) {
@@ -61,7 +61,7 @@ export function lazyLoad(exports: any, props: string[], loadModule: any) {
     for (let property of props) {
         Object.defineProperty(exports, property, {
             enumerable: true,
-            get: function () {
+            get: function() {
                 return loadModule()[property];
             },
         });
@@ -72,16 +72,16 @@ export async function callAsync<T>(
     tok: string,
     props: pulumi.Inputs,
     res?: pulumi.Resource,
-    opts?: { property?: string },
+    opts?: {property?: string},
 ): Promise<T> {
     const o: any = runtime.call<T>(tok, props, res);
     const value = await o.promise(true /*withUnknowns*/);
     const isKnown = await o.isKnown;
     const isSecret = await o.isSecret;
-    const problem: string | undefined =
+    const problem: string|undefined =
         !isKnown ? "an unknown value"
-            : isSecret ? "a secret value"
-                : undefined;
+        : isSecret ? "a secret value"
+        : undefined;
     // Ingoring o.resources silently. They are typically non-empty, r.f() calls include r as a dependency.
     if (problem) {
         throw new Error(`Plain resource method "${tok}" incorrectly returned ${problem}. ` +

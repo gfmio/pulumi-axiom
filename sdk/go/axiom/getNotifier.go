@@ -7,8 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/gfmio/pulumi-axiom/sdk/go/axiom/internal"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 func LookupNotifier(ctx *pulumi.Context, args *LookupNotifierArgs, opts ...pulumi.InvokeOption) (*LookupNotifierResult, error) {
