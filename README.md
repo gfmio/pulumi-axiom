@@ -1,5 +1,11 @@
 # Axiom Resource Provider
 
+> This is an early experiment to create a Pulumi provider for [Axiom](https://axiom.co) based on the Axiom terraform provider.
+> 
+> I've so far only published the node.js bindings as `@gfmio/pulumi-axiom` for my personal testing.
+> 
+> If you want to try this package out in another language, file an issue and I'll get it published. If there's interest and the package has been tested, we can try to move it to pulumiverse.
+
 The Axiom Resource Provider lets you manage [axiom](https://www.pulumi.com/registry/packages/axiom/) resources.
 
 ## Installing
