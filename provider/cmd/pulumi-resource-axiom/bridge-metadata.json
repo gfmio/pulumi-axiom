@@ -1,0 +1,84 @@
+{
+    "renames": {
+        "resources": {
+            "axiom:index/dataset:Dataset": "axiom_dataset",
+            "axiom:index/monitor:Monitor": "axiom_monitor",
+            "axiom:index/notifier:Notifier": "axiom_notifier",
+            "axiom:index/user:User": "axiom_user"
+        },
+        "functions": {
+            "axiom:index/getDataset:getDataset": "axiom_dataset",
+            "axiom:index/getMonitor:getMonitor": "axiom_monitor",
+            "axiom:index/getNotifier:getNotifier": "axiom_notifier",
+            "axiom:index/getUser:getUser": "axiom_user"
+        },
+        "renamedProperties": {
+            "axiom:index/NotifierProperties:NotifierProperties": {
+                "discordWebhook": "discord_webhook"
+            },
+            "axiom:index/NotifierPropertiesDiscord:NotifierPropertiesDiscord": {
+                "discordChannel": "discord_channel",
+                "discordToken": "discord_token"
+            },
+            "axiom:index/NotifierPropertiesDiscordWebhook:NotifierPropertiesDiscordWebhook": {
+                "discordWebhookUrl": "discord_webhook_url"
+            },
+            "axiom:index/NotifierPropertiesOpsgenie:NotifierPropertiesOpsgenie": {
+                "apiKey": "api_key",
+                "isEu": "is_eu"
+            },
+            "axiom:index/NotifierPropertiesPagerduty:NotifierPropertiesPagerduty": {
+                "routingKey": "routing_key"
+            },
+            "axiom:index/NotifierPropertiesSlack:NotifierPropertiesSlack": {
+                "slackUrl": "slack_url"
+            },
+            "axiom:index/getMonitor:getMonitor": {
+                "alertOnNoData": "alert_on_no_data",
+                "aplQuery": "apl_query",
+                "disabledUntil": "disabled_until",
+                "intervalMinutes": "interval_minutes",
+                "notifierIds": "notifier_ids",
+                "notifyByGroup": "notify_by_group",
+                "rangeMinutes": "range_minutes"
+            },
+            "axiom:index/getNotifierProperties:getNotifierProperties": {
+                "discordWebhook": "discord_webhook"
+            },
+            "axiom:index/getNotifierPropertiesDiscord:getNotifierPropertiesDiscord": {
+                "discordChannel": "discord_channel",
+                "discordToken": "discord_token"
+            },
+            "axiom:index/getNotifierPropertiesDiscordWebhook:getNotifierPropertiesDiscordWebhook": {
+                "discordWebhookUrl": "discord_webhook_url"
+            },
+            "axiom:index/getNotifierPropertiesOpsgenie:getNotifierPropertiesOpsgenie": {
+                "apiKey": "api_key",
+                "isEu": "is_eu"
+            },
+            "axiom:index/getNotifierPropertiesPagerduty:getNotifierPropertiesPagerduty": {
+                "routingKey": "routing_key"
+            },
+            "axiom:index/getNotifierPropertiesSlack:getNotifierPropertiesSlack": {
+                "slackUrl": "slack_url"
+            },
+            "axiom:index/monitor:Monitor": {
+                "alertOnNoData": "alert_on_no_data",
+                "aplQuery": "apl_query",
+                "disabledUntil": "disabled_until",
+                "intervalMinutes": "interval_minutes",
+                "notifierIds": "notifier_ids",
+                "notifyByGroup": "notify_by_group",
+                "rangeMinutes": "range_minutes"
+            },
+            "axiom:index:Provider": {
+                "apiToken": "api_token",
+                "baseUrl": "base_url"
+            }
+        },
+        "renamedConfigProperties": {
+            "apiToken": "api_token",
+            "baseUrl": "base_url"
+        }
+    }
+}

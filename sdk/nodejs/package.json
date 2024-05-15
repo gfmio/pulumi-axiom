@@ -1,0 +1,29 @@
+{
+    "name": "@gfmio/pulumi-axiom",
+    "version": "${VERSION}",
+    "description": "A Pulumi package for creating and managing Axiom resources. Based on terraform-provider-axiom: version v1.1.0",
+    "keywords": [
+        "pulumi",
+        "axiom",
+        "category/monitoring"
+    ],
+    "homepage": "https://github.com/gfmio/pulumi-axiom",
+    "repository": "https://github.com/gfmio/pulumi-axiom",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/mime": "^2.0.0",
+        "@types/node": "^10.0.0",
+        "typescript": "^4.3.5"
+    },
+    "pulumi": {
+        "resource": true,
+        "name": "axiom",
+        "server": "github://api.github.com/gfmio/pulumi-axiom"
+    }
+}

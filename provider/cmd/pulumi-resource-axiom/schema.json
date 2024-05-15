@@ -1,0 +1,950 @@
+{
+    "name": "axiom",
+    "displayName": "Axiom",
+    "description": "A Pulumi package for creating and managing Axiom resources",
+    "keywords": [
+        "pulumi",
+        "axiom",
+        "category/monitoring"
+    ],
+    "homepage": "https://github.com/gfmio/pulumi-axiom",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`axiom` Terraform Provider](https://github.com/axiomhq/terraform-provider-axiom).",
+    "repository": "https://github.com/gfmio/pulumi-axiom",
+    "logoUrl": "https://raw.githubusercontent.com/gfmio/pulumi-axiom/main/docs/axiom.png",
+    "pluginDownloadURL": "github://api.github.com/gfmio/pulumi-axiom",
+    "publisher": "gfmio",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20",
+            "rootNamespace": "PulumiAxiom"
+        },
+        "go": {
+            "importBasePath": "github.com/gfmio/pulumi-axiom/sdk/go/axiom",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "java": {
+            "basePackage": "io.gfm.pulumiaxiom",
+            "buildFiles": "",
+            "gradleNexusPublishPluginVersion": "",
+            "gradleTest": ""
+        },
+        "nodejs": {
+            "packageName": "@gfmio/pulumi-axiom",
+            "packageDescription": "A Pulumi package for creating and managing Axiom resources. Based on terraform-provider-axiom: version v1.1.0",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/axiomhq/terraform-provider-axiom)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-axiom` repo](https://github.com/gfmio/pulumi-axiom/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-axiom` repo](https://github.com/axiomhq/terraform-provider-axiom/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "packageName": "pulumi_axiom",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/axiomhq/terraform-provider-axiom)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-axiom` repo](https://github.com/gfmio/pulumi-axiom/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-axiom` repo](https://github.com/axiomhq/terraform-provider-axiom/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "apiToken": {
+                "type": "string",
+                "description": "The Axiom API token.\n"
+            },
+            "baseUrl": {
+                "type": "string",
+                "description": "The base url of the axiom api.\n"
+            }
+        },
+        "defaults": [
+            "apiToken"
+        ]
+    },
+    "types": {
+        "axiom:index/NotifierProperties:NotifierProperties": {
+            "properties": {
+                "discord": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesDiscord:NotifierPropertiesDiscord"
+                },
+                "discordWebhook": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesDiscordWebhook:NotifierPropertiesDiscordWebhook"
+                },
+                "email": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesEmail:NotifierPropertiesEmail"
+                },
+                "opsgenie": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesOpsgenie:NotifierPropertiesOpsgenie"
+                },
+                "pagerduty": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesPagerduty:NotifierPropertiesPagerduty"
+                },
+                "slack": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesSlack:NotifierPropertiesSlack"
+                },
+                "webhook": {
+                    "$ref": "#/types/axiom:index/NotifierPropertiesWebhook:NotifierPropertiesWebhook"
+                }
+            },
+            "type": "object"
+        },
+        "axiom:index/NotifierPropertiesDiscord:NotifierPropertiesDiscord": {
+            "properties": {
+                "discordChannel": {
+                    "type": "string",
+                    "description": "The discord channel\n"
+                },
+                "discordToken": {
+                    "type": "string",
+                    "description": "The discord token\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "discordChannel",
+                "discordToken"
+            ]
+        },
+        "axiom:index/NotifierPropertiesDiscordWebhook:NotifierPropertiesDiscordWebhook": {
+            "properties": {
+                "discordWebhookUrl": {
+                    "type": "string",
+                    "description": "The discord webhook URL\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "discordWebhookUrl"
+            ]
+        },
+        "axiom:index/NotifierPropertiesEmail:NotifierPropertiesEmail": {
+            "properties": {
+                "emails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The emails to be notified\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "emails"
+            ]
+        },
+        "axiom:index/NotifierPropertiesOpsgenie:NotifierPropertiesOpsgenie": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "The opsgenie API key\n"
+                },
+                "isEu": {
+                    "type": "boolean",
+                    "description": "The opsgenie is EU\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "isEu"
+            ]
+        },
+        "axiom:index/NotifierPropertiesPagerduty:NotifierPropertiesPagerduty": {
+            "properties": {
+                "routingKey": {
+                    "type": "string",
+                    "description": "The pagerduty routing key\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "The pager duty token\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "routingKey",
+                "token"
+            ]
+        },
+        "axiom:index/NotifierPropertiesSlack:NotifierPropertiesSlack": {
+            "properties": {
+                "slackUrl": {
+                    "type": "string",
+                    "description": "The slack URL\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "slackUrl"
+            ]
+        },
+        "axiom:index/NotifierPropertiesWebhook:NotifierPropertiesWebhook": {
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "The webhook URL\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "url"
+            ]
+        },
+        "axiom:index/getNotifierProperties:getNotifierProperties": {
+            "properties": {
+                "discord": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesDiscord:getNotifierPropertiesDiscord"
+                },
+                "discordWebhook": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesDiscordWebhook:getNotifierPropertiesDiscordWebhook"
+                },
+                "email": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesEmail:getNotifierPropertiesEmail"
+                },
+                "opsgenie": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesOpsgenie:getNotifierPropertiesOpsgenie"
+                },
+                "pagerduty": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesPagerduty:getNotifierPropertiesPagerduty"
+                },
+                "slack": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesSlack:getNotifierPropertiesSlack"
+                },
+                "webhook": {
+                    "$ref": "#/types/axiom:index/getNotifierPropertiesWebhook:getNotifierPropertiesWebhook"
+                }
+            },
+            "type": "object",
+            "required": [
+                "discord",
+                "discordWebhook",
+                "email",
+                "opsgenie",
+                "pagerduty",
+                "slack",
+                "webhook"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesDiscord:getNotifierPropertiesDiscord": {
+            "properties": {
+                "discordChannel": {
+                    "type": "string",
+                    "description": "The discord channel\n"
+                },
+                "discordToken": {
+                    "type": "string",
+                    "description": "The discord token\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "discordChannel",
+                "discordToken"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesDiscordWebhook:getNotifierPropertiesDiscordWebhook": {
+            "properties": {
+                "discordWebhookUrl": {
+                    "type": "string",
+                    "description": "The discord webhook URL\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "discordWebhookUrl"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesEmail:getNotifierPropertiesEmail": {
+            "properties": {
+                "emails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The emails to be notified\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "emails"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesOpsgenie:getNotifierPropertiesOpsgenie": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "The opsgenie API key\n"
+                },
+                "isEu": {
+                    "type": "boolean",
+                    "description": "The opsgenie is EU\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "isEu"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesPagerduty:getNotifierPropertiesPagerduty": {
+            "properties": {
+                "routingKey": {
+                    "type": "string",
+                    "description": "The pagerduty routing key\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "The pager duty token\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "routingKey",
+                "token"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesSlack:getNotifierPropertiesSlack": {
+            "properties": {
+                "slackUrl": {
+                    "type": "string",
+                    "description": "The slack URL\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "slackUrl"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "axiom:index/getNotifierPropertiesWebhook:getNotifierPropertiesWebhook": {
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "The webhook URL\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the axiom package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apiToken": {
+                "type": "string",
+                "description": "The Axiom API token.\n"
+            },
+            "baseUrl": {
+                "type": "string",
+                "description": "The base url of the axiom api.\n"
+            }
+        },
+        "required": [
+            "apiToken"
+        ],
+        "inputProperties": {
+            "apiToken": {
+                "type": "string",
+                "description": "The Axiom API token.\n"
+            },
+            "baseUrl": {
+                "type": "string",
+                "description": "The base url of the axiom api.\n"
+            }
+        },
+        "requiredInputs": [
+            "apiToken"
+        ]
+    },
+    "resources": {
+        "axiom:index/dataset:Dataset": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Dataset description\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Dataset name\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Dataset description\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Dataset name\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Dataset resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Dataset description\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Dataset name\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "axiom:index/monitor:Monitor": {
+            "properties": {
+                "alertOnNoData": {
+                    "type": "boolean",
+                    "description": "If the monitor should trigger an alert if there is no data\n"
+                },
+                "aplQuery": {
+                    "type": "string",
+                    "description": "The query used inside the monitor\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Monitor description\n"
+                },
+                "disabledUntil": {
+                    "type": "string",
+                    "description": "The time the monitor will be disabled until\n"
+                },
+                "intervalMinutes": {
+                    "type": "integer",
+                    "description": "How often the monitor should run\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Monitor name\n"
+                },
+                "notifierIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of notifier id's to be used when this monitor triggers\n"
+                },
+                "notifyByGroup": {
+                    "type": "boolean",
+                    "description": "If the monitor should track non-time groups separately\n"
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Operator used in monitor trigger evaluation\n"
+                },
+                "rangeMinutes": {
+                    "type": "integer",
+                    "description": "Query time range from now\n"
+                },
+                "resolvable": {
+                    "type": "boolean",
+                    "description": "Determines whether the events triggered by the monitor are individually resolvable. This has no effect on threshold\nmonitors\n"
+                },
+                "threshold": {
+                    "type": "number",
+                    "description": "The threshold where the monitor should trigger\n"
+                }
+            },
+            "required": [
+                "alertOnNoData",
+                "aplQuery",
+                "intervalMinutes",
+                "name",
+                "notifyByGroup",
+                "operator",
+                "rangeMinutes",
+                "resolvable",
+                "threshold"
+            ],
+            "inputProperties": {
+                "alertOnNoData": {
+                    "type": "boolean",
+                    "description": "If the monitor should trigger an alert if there is no data\n"
+                },
+                "aplQuery": {
+                    "type": "string",
+                    "description": "The query used inside the monitor\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Monitor description\n"
+                },
+                "disabledUntil": {
+                    "type": "string",
+                    "description": "The time the monitor will be disabled until\n"
+                },
+                "intervalMinutes": {
+                    "type": "integer",
+                    "description": "How often the monitor should run\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Monitor name\n"
+                },
+                "notifierIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of notifier id's to be used when this monitor triggers\n"
+                },
+                "notifyByGroup": {
+                    "type": "boolean",
+                    "description": "If the monitor should track non-time groups separately\n"
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Operator used in monitor trigger evaluation\n"
+                },
+                "rangeMinutes": {
+                    "type": "integer",
+                    "description": "Query time range from now\n"
+                },
+                "resolvable": {
+                    "type": "boolean",
+                    "description": "Determines whether the events triggered by the monitor are individually resolvable. This has no effect on threshold\nmonitors\n"
+                },
+                "threshold": {
+                    "type": "number",
+                    "description": "The threshold where the monitor should trigger\n"
+                }
+            },
+            "requiredInputs": [
+                "alertOnNoData",
+                "aplQuery",
+                "intervalMinutes",
+                "notifyByGroup",
+                "operator",
+                "rangeMinutes",
+                "threshold"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Monitor resources.\n",
+                "properties": {
+                    "alertOnNoData": {
+                        "type": "boolean",
+                        "description": "If the monitor should trigger an alert if there is no data\n"
+                    },
+                    "aplQuery": {
+                        "type": "string",
+                        "description": "The query used inside the monitor\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Monitor description\n"
+                    },
+                    "disabledUntil": {
+                        "type": "string",
+                        "description": "The time the monitor will be disabled until\n"
+                    },
+                    "intervalMinutes": {
+                        "type": "integer",
+                        "description": "How often the monitor should run\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Monitor name\n"
+                    },
+                    "notifierIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of notifier id's to be used when this monitor triggers\n"
+                    },
+                    "notifyByGroup": {
+                        "type": "boolean",
+                        "description": "If the monitor should track non-time groups separately\n"
+                    },
+                    "operator": {
+                        "type": "string",
+                        "description": "Operator used in monitor trigger evaluation\n"
+                    },
+                    "rangeMinutes": {
+                        "type": "integer",
+                        "description": "Query time range from now\n"
+                    },
+                    "resolvable": {
+                        "type": "boolean",
+                        "description": "Determines whether the events triggered by the monitor are individually resolvable. This has no effect on threshold\nmonitors\n"
+                    },
+                    "threshold": {
+                        "type": "number",
+                        "description": "The threshold where the monitor should trigger\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "axiom:index/notifier:Notifier": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Notifier name\n"
+                },
+                "properties": {
+                    "$ref": "#/types/axiom:index/NotifierProperties:NotifierProperties",
+                    "description": "The properties of the notifier\n"
+                }
+            },
+            "required": [
+                "name",
+                "properties"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Notifier name\n"
+                },
+                "properties": {
+                    "$ref": "#/types/axiom:index/NotifierProperties:NotifierProperties",
+                    "description": "The properties of the notifier\n"
+                }
+            },
+            "requiredInputs": [
+                "properties"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Notifier resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Notifier name\n"
+                    },
+                    "properties": {
+                        "$ref": "#/types/axiom:index/NotifierProperties:NotifierProperties",
+                        "description": "The properties of the notifier\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "axiom:index/user:User": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Users email\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Users name\n"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Users role\n"
+                }
+            },
+            "required": [
+                "email",
+                "name",
+                "role"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "Users email\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Users name\n"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Users role\n"
+                }
+            },
+            "requiredInputs": [
+                "email",
+                "role"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering User resources.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Users email\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Users name\n"
+                    },
+                    "role": {
+                        "type": "string",
+                        "description": "Users role\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "axiom:index/getDataset:getDataset": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDataset.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Dataset identifier\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDataset.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Dataset description\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Dataset identifier\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Dataset name\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "id",
+                    "name"
+                ]
+            }
+        },
+        "axiom:index/getMonitor:getMonitor": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getMonitor.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Monitor identifier\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getMonitor.\n",
+                "properties": {
+                    "alertOnNoData": {
+                        "type": "boolean",
+                        "description": "If the monitor should trigger an alert if there is no data\n"
+                    },
+                    "aplQuery": {
+                        "type": "string",
+                        "description": "The query used inside the monitor\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Monitor description\n"
+                    },
+                    "disabledUntil": {
+                        "type": "string",
+                        "description": "The time the monitor will be disabled until\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Monitor identifier\n"
+                    },
+                    "intervalMinutes": {
+                        "type": "integer",
+                        "description": "How often the monitor should run\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Monitor name\n"
+                    },
+                    "notifierIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of notifier id's to be used when this monitor triggers\n"
+                    },
+                    "notifyByGroup": {
+                        "type": "boolean"
+                    },
+                    "operator": {
+                        "type": "string",
+                        "description": "Operator used in monitor trigger evaluation\n"
+                    },
+                    "rangeMinutes": {
+                        "type": "integer",
+                        "description": "Query time range from now\n"
+                    },
+                    "resolvable": {
+                        "type": "boolean"
+                    },
+                    "threshold": {
+                        "type": "number",
+                        "description": "The threshold where the monitor should trigger\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "alertOnNoData",
+                    "aplQuery",
+                    "description",
+                    "disabledUntil",
+                    "id",
+                    "intervalMinutes",
+                    "name",
+                    "notifierIds",
+                    "notifyByGroup",
+                    "operator",
+                    "rangeMinutes",
+                    "resolvable",
+                    "threshold"
+                ]
+            }
+        },
+        "axiom:index/getNotifier:getNotifier": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getNotifier.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Notifier identifier\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getNotifier.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Notifier identifier\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Notifier name\n"
+                    },
+                    "properties": {
+                        "$ref": "#/types/axiom:index/getNotifierProperties:getNotifierProperties",
+                        "description": "The properties of the notifier\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "properties"
+                ]
+            }
+        },
+        "axiom:index/getUser:getUser": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getUser.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Users identifier\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getUser.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Users email\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Users identifier\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Users name\n"
+                    },
+                    "role": {
+                        "type": "string",
+                        "description": "Users role\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email",
+                    "id",
+                    "name",
+                    "role"
+                ]
+            }
+        }
+    }
+}
